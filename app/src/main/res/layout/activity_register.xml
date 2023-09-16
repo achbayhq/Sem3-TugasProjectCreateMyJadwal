@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg1"
+    tools:context=".registerActivity">
+
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="392dp"
+        android:layout_height="706dp"
+        android:alpha="0.6"
+        android:background="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.64" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="125dp"
+        android:layout_height="112dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/view"
+        app:srcCompat="@drawable/logo_jti_removebg_preview" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="211dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="16dp"
+        android:text="REGISTER YOUR ACCOUNT"
+        android:textColor="@color/white"
+        android:textSize="26dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.525" />
+
+    <EditText
+        android:id="@+id/txtNama"
+        android:layout_width="342dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="152dp"
+        android:ems="10"
+        android:hint="Nama Lengkap"
+        android:background="@drawable/border"
+        android:padding="10dp"
+        android:inputType="text"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/view" />
+
+    <EditText
+        android:id="@+id/txtUsrnmRegist"
+        android:layout_width="340dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Username"
+        android:background="@drawable/border"
+        android:padding="10dp"
+        android:inputType="text"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="@+id/txtNama"
+        app:layout_constraintStart_toStartOf="@+id/txtNama"
+        app:layout_constraintTop_toBottomOf="@+id/txtNama" />
+
+    <EditText
+        android:id="@+id/txtEmail"
+        android:layout_width="0dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:background="@drawable/border"
+        android:padding="10dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="@+id/txtUsrnmRegist"
+        app:layout_constraintStart_toStartOf="@+id/txtUsrnmRegist"
+        app:layout_constraintTop_toBottomOf="@+id/txtUsrnmRegist" />
+
+    <EditText
+        android:id="@+id/txtPassRegist"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Password"
+        android:background="@drawable/border"
+        android:padding="10dp"
+        android:inputType="textPassword"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FDFDFD"
+        app:layout_constraintEnd_toEndOf="@+id/txtEmail"
+        app:layout_constraintStart_toStartOf="@+id/txtEmail"
+        app:layout_constraintTop_toBottomOf="@+id/txtEmail" />
+
+    <Spinner
+        android:id="@+id/gender"
+        android:layout_width="188dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="18dp"
+        android:background="@drawable/border"
+        android:backgroundTint="#AED2FF"
+        android:dropDownSelector="@color/design_default_color_error"
+        android:padding="10dp"
+        app:layout_constraintStart_toStartOf="@+id/txtTgl"
+        app:layout_constraintTop_toBottomOf="@+id/txtTgl" />
+
+    <EditText
+        android:id="@+id/txtAlamat"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="18dp"
+        android:ems="10"
+        android:hint="Alamat Lengkap"
+        android:background="@drawable/border"
+        android:padding="10dp"
+        android:inputType="text"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="@+id/txtTgl"
+        app:layout_constraintStart_toStartOf="@+id/txtTgl"
+        app:layout_constraintTop_toBottomOf="@+id/gender" />
+
+    <Button
+        android:id="@+id/btnRegist"
+        android:layout_width="317dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="24dp"
+        android:text="Registrasi"
+        android:onClick="udahRegist"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/txtAlamat"
+        app:layout_constraintStart_toStartOf="@+id/txtAlamat"
+        app:layout_constraintTop_toBottomOf="@+id/txtAlamat" />
+
+    <EditText
+        android:id="@+id/txtTgl"
+        android:layout_width="340dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Tanggal Lahir"
+        android:onClick="pilihTgl"
+        android:background="@drawable/border"
+        android:padding="10dp"
+        android:inputType="date"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="@+id/txtPassRegist"
+        app:layout_constraintStart_toStartOf="@+id/txtPassRegist"
+        app:layout_constraintTop_toBottomOf="@+id/txtPassRegist" />
+
+    <TextView
+        android:id="@+id/keLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Sudah memiliki Akun? Login"
+        android:textColor="#FFFFFF"
+        android:onClick="keLogin"
+        app:layout_constraintEnd_toEndOf="@+id/btnRegist"
+        app:layout_constraintStart_toStartOf="@+id/btnRegist"
+        app:layout_constraintTop_toBottomOf="@+id/btnRegist" />
+</androidx.constraintlayout.widget.ConstraintLayout>

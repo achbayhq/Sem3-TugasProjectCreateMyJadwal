@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Login</string>
+
+    <string-array name="pilihan">
+        <item> Laki-Laki </item>
+        <item> Perempuan </item>
+        <item> Transgender </item>
+    </string-array>
+
+    <string-array name="temanku">
+        <item>Roni</item>
+        <item>Adit</item>
+        <item>Agung</item>
+        <item>Kimi</item>
+        <item>Revan</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
