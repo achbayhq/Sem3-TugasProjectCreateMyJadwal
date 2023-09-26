@@ -98,15 +98,32 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:padding="10dp">
 
-            <TextView
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/btnMatkulPilihan"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mata Kuliah yang Dipilih : "
-                android:textSize="20dp"
-                android:textStyle="bold"/>
+                android:backgroundTint="#088395"
+                android:onClick="keMatkulPilihan"
+                android:layout_marginRight="5dp"
+                android:text="Matkul Pilihan"/>
+            <Button
+                android:id="@+id/btnJadwal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#088395"
+                android:onClick="keJadwal"
+                android:layout_marginRight="5dp"
+                android:text="Jadwal Matkul"/>
+            <Button
+                android:id="@+id/btnIPK"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#088395"
+                android:onClick="keIPK"
+                android:text="IPK"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -114,12 +131,14 @@
             android:orientation="vertical"
             android:padding="8dp">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/listMatkul"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:listitem="@layout/card_view"
-                android:padding="8dp"/>
+                android:layout_height="420dp"
+                android:background="@drawable/border"
+                android:id="@+id/cekkFragment">
+
+            </FrameLayout>
+
 
         </LinearLayout>
     </LinearLayout>

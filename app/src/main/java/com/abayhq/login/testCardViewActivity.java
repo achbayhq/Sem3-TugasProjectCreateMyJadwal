@@ -8,14 +8,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 
-public class testCardViewActivity extends AppCompatActivity implements adapterMatkul.OnItemClickListener{
+public class testCardViewActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
-    private adapterMatkul adapter;
-    private ArrayList<setMatkul> matkulArrayList;
     FragmentManager fragmentManager;
 
     @Override
@@ -25,41 +25,39 @@ public class testCardViewActivity extends AppCompatActivity implements adapterMa
 
         fragmentManager = getSupportFragmentManager();
 
-        addData();
-        recyclerView = (RecyclerView) findViewById(R.id.listMatkul);
-        adapter = new adapterMatkul(this,matkulArrayList, this);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(testCardViewActivity.this);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        matkulPilihanFragment mkf = new matkulPilihanFragment();
+        transaction.replace(R.id.cekkFragment, mkf);
+        transaction.addToBackStack(null);
+        transaction.commit();
+
 
     }
 
-    void addData(){
-        matkulArrayList = new ArrayList<>();
-        matkulArrayList.add(new setMatkul("TIF10101", "Pemrograman Dasar"));
-        matkulArrayList.add(new setMatkul("TIF10102", "Kualitas Perangkat Lunak"));
-        matkulArrayList.add(new setMatkul("TIF10103", "Database"));
-        matkulArrayList.add(new setMatkul("TIF10104", "Mobile Aplication"));
-        matkulArrayList.add(new setMatkul("TIF10105", "Matematika Diskrit"));
-        matkulArrayList.add(new setMatkul("TIF10108", "Intermediate English"));
-        matkulArrayList.add(new setMatkul("TIF10111", "Jaringan Komputer"));
-    }
 
-    @Override
-    public void onItemClick(setMatkul item) {
+    public void keMatkulPilihan(View view) {
 
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        matkulFragment mkf = new matkulFragment();
+        matkulPilihanFragment mkf = new matkulPilihanFragment();
+        transaction.replace(R.id.cekkFragment, mkf);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
 
-        String mkl = item.getterMatkul();
-        String id = item.getterIdMatkul();
-        Bundle bn = new Bundle();
+    public void keJadwal(View view) {
 
-        bn.putString("id", id);
-        bn.putString("mk", mkl);
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        jadwalMatkulFragment mkf = new jadwalMatkulFragment();
+        transaction.replace(R.id.cekkFragment, mkf);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
 
-        mkf.setArguments(bn);
-        transaction.replace(R.id.forFragment, mkf);
+    public void keIPK(View view) {
+
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        IPKFragment mkf = new IPKFragment();
+        transaction.replace(R.id.cekkFragment, mkf);
         transaction.addToBackStack(null);
         transaction.commit();
     }

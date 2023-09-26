@@ -6,17 +6,20 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo_jti_removebg_preview"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Login"
         tools:targetApi="31">
+<!--        <activity-->
+<!--            android:name=".dasboardActivity"-->
+<!--            android:exported="false" />-->
         <activity
-            android:name=".testCardViewActivity"
+            android:name=".detailMatkulActivity"
             android:exported="false" />
         <activity
-            android:name=".crdVwActivity"
+            android:name=".testCardViewActivity"
             android:exported="false" />
         <activity
             android:name=".listViewActivity"
@@ -25,7 +28,7 @@
             android:name=".registerActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".dasboardActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

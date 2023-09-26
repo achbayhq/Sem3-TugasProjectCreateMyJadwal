@@ -10,8 +10,8 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    String Nm;
-    String Pass;
+    String Nm = "abayhq";
+    String Pass = "112233";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

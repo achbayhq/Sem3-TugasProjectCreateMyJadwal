@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="Profile"
+        android:id="@+id/menu1"
+        android:icon="@drawable/user"
+        />
+    <item
+        android:title="Mata Kuliah"
+        android:id="@+id/menu2"
+        android:icon="@drawable/matkul"
+        />
+    <item
+        android:title="Jadwal"
+        android:id="@+id/menu3"
+        android:icon="@drawable/jadwal"
+        />
+
+</menu>

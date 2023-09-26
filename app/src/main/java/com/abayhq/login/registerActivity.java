@@ -20,8 +20,8 @@ import java.util.Locale;
 public class registerActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
 
-    public String nama = "abayhq";
-    public String pass = "112233";
+    public String nama;
+    public String pass;
     EditText etDate;
     Calendar myCalendar;
 

@@ -9,16 +9,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link matkulFragment#newInstance} factory method to
+ * Use the {@link IPKFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class matkulFragment extends Fragment {
+public class IPKFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,7 +28,7 @@ public class matkulFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public matkulFragment() {
+    public IPKFragment() {
         // Required empty public constructor
     }
 
@@ -39,11 +38,11 @@ public class matkulFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment pDasarFragment.
+     * @return A new instance of fragment IPKFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static matkulFragment newInstance(String param1, String param2) {
-        matkulFragment fragment = new matkulFragment();
+    public static IPKFragment newInstance(String param1, String param2) {
+        IPKFragment fragment = new IPKFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,42 +60,33 @@ public class matkulFragment extends Fragment {
     }
 
     private RecyclerView recyclerView;
-    private adapterDosen adapter;
-    private  ArrayList<setDosen> dosenArrayList;
-
+    private adapterIPK adapter;
+    private ArrayList<setIPK> IPKArrayList;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_matkul, container, false);
-        Bundle bundle = getArguments();
+        // Inflate the layout for this fragment
+        View rootView =  inflater.inflate(R.layout.fragment_i_p_k, container, false);
 
-        recyclerView = (RecyclerView) rootView.findViewById(R.id.dosenList);
-        adapter = new adapterDosen(dosenArrayList);
+        addData();
+        recyclerView = rootView.findViewById(R.id.listIPK);
+        adapter = new adapterIPK(IPKArrayList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
-        if (bundle != null) {
-            String idMatkul = bundle.getString("id");
-            String setMatkul = bundle.getString("mk");
-
-            if (idMatkul.equals("TIF10101")) {
-                TextView id = rootView.findViewById(R.id.idMkl);
-                TextView mkl = rootView.findViewById(R.id.nmMkl);
-                TextView desnya = rootView.findViewById(R.id.desnya);
-
-                id.setText(idMatkul);
-                mkl.setText(setMatkul);
-                desnya.setText("Ini Deskripsi Mata Kuliah Pemrograman dasar");
-
-                addData01();
-            }
-        }
         return rootView;
     }
 
-    void addData01(){
-        dosenArrayList = new ArrayList<>();
-        dosenArrayList.add(new setDosen("ini gambar", "ini nama"));
+    void addData(){
+        IPKArrayList = new ArrayList<>();
+        IPKArrayList.add(new setIPK("Agama", "A", "4"));
+        IPKArrayList.add(new setIPK("Pancasila", "A", "4"));
+        IPKArrayList.add(new setIPK("Basic English", "AB", "3.5"));
+        IPKArrayList.add(new setIPK("Logika Algoritma", "A", "4"));
+        IPKArrayList.add(new setIPK("Konsep Basis Data", "A", "4"));
+        IPKArrayList.add(new setIPK("Pemrograman dasar", "B", "3"));
+        IPKArrayList.add(new setIPK("Workshop Pengembangan Perakngkat Lunak", "A", "4"));
+        IPKArrayList.add(new setIPK("Workshop Basis Data", "A", "4"));
     }
 }

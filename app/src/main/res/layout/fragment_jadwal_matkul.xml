@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".jadwalMatkulFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/buttonSenin"
+                android:onClick="keSenin"
+                android:layout_width="91dp"
+                android:layout_height="43dp"
+                android:text="Senin"/>
+            <Button
+                android:id="@+id/buttonSelasa"
+                android:layout_width="91dp"
+                android:layout_height="43dp"
+                android:onClick="keSelasa"
+                android:text="Selasa"/>
+            <Button
+                android:id="@+id/buttonRabu"
+                android:layout_width="91dp"
+                android:layout_height="43dp"
+                android:onClick="keRabu"
+                android:text="Rabu"/>
+            <Button
+                android:id="@+id/buttonKamis"
+                android:layout_width="91dp"
+                android:layout_height="43dp"
+                android:onClick="keKamis"
+                android:text="Kamis"/>
+            <Button
+                android:id="@+id/buttonJumat"
+                android:layout_width="91dp"
+                android:layout_height="43dp"
+                android:onClick="keJumat"
+                android:text="Jumat"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/hari"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hari"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:textSize="20dp"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcyJadwal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    tools:listitem="@layout/jadwalcard"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>
