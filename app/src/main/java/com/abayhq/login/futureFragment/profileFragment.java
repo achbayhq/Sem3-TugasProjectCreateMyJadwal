@@ -1,5 +1,7 @@
 package com.abayhq.login.futureFragment;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.abayhq.login.R;
+import com.abayhq.login.database.dbProfileHelper;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -70,6 +73,7 @@ public class profileFragment extends Fragment {
     String NIMtxt;
     String prodiTxt;
     String tlpTxt;
+    String img;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -82,35 +86,44 @@ public class profileFragment extends Fragment {
         TextView nimP = root.findViewById(R.id.nimProfile);
         TextView prodiP = root.findViewById(R.id.prodiProfile);
         TextView tlpP = root.findViewById(R.id.tlpProfile);
-        Bundle bundle = getArguments();
-        if (bundle != null) {
 
-            namaTxt = bundle.getString("nama");
-            alamatTxt = bundle.getString("alamat");
-            emailTxt = bundle.getString("email");
-            tglTxt = bundle.getString("tanggalLahir");
-            NIMtxt = bundle.getString("nim");
-            prodiTxt = bundle.getString("prodi");
-            tlpTxt = bundle.getString("tlp");
+        dbProfileHelper dbHelper = new dbProfileHelper(getContext(), dbProfileHelper.DB_NAME, null, dbProfileHelper.DB_VER);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
 
-            namaP.setText(namaTxt);
-            alamatP.setText(alamatTxt);
-            emailP.setText(emailTxt);
-            tglP.setText(tglTxt);
-            nimP.setText(NIMtxt);
-            prodiP.setText(prodiTxt);
-            tlpP.setText(tlpTxt);
-
-            byte[] byteArray = bundle.getByteArray("img");
-            if (byteArray != null) {
-                Bitmap receivedImageBitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
-
-                ImageView imageView = root.findViewById(R.id.forProfile);
-                imageView.setImageBitmap(receivedImageBitmap);
-            }
-        }else{
-            Toast.makeText(getContext(), "Data Kosong!!", Toast.LENGTH_SHORT).show();
+        String[] field = {"nama", "nim", "email", "telephone", "tanggal_lahir", "prodi", "alamat", "img"};
+        Cursor cursor = db.query(
+                "profile",
+                field,
+                null,
+                null,
+                null,
+                null,
+                "no ASC"
+        );
+        while (cursor.moveToNext()) {
+            namaTxt = cursor.getString(cursor.getColumnIndexOrThrow("nama"));
+            alamatTxt = cursor.getString(cursor.getColumnIndexOrThrow("alamat"));
+            emailTxt = cursor.getString(cursor.getColumnIndexOrThrow("email"));
+            tglTxt = cursor.getString(cursor.getColumnIndexOrThrow("tanggal_lahir"));
+            NIMtxt = cursor.getString(cursor.getColumnIndexOrThrow("nim"));
+            prodiTxt = cursor.getString(cursor.getColumnIndexOrThrow("prodi"));
+            tlpTxt = cursor.getString(cursor.getColumnIndexOrThrow("telephone"));
+            img = cursor.getString(cursor.getColumnIndexOrThrow("img"));
         }
+        cursor.close();
+
+        namaP.setText(namaTxt);
+        alamatP.setText(alamatTxt);
+        emailP.setText(emailTxt);
+        tglP.setText(tglTxt);
+        nimP.setText(NIMtxt);
+        prodiP.setText(prodiTxt);
+        tlpP.setText(tlpTxt);
+
+        ImageView imgView = root.findViewById(R.id.forProfile);
+        Bitmap imageBitmap = BitmapFactory.decodeFile(img);
+        imgView.setImageBitmap(imageBitmap);
+
         return root;
     }
 }

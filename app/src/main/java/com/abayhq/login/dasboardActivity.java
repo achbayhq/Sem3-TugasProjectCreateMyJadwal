@@ -16,16 +16,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class dasboardActivity extends AppCompatActivity {
 
-    String Username;
-    String Password;
-    String namaTxt;
-    String alamatTxt;
-    String emailTxt;
-    String tglTxt;
-    String NIMtxt;
-    String prodiTxt;
-    String tlpTxt;
-    byte[] byteArray;
 
     profileFragment profileFragment = new profileFragment();
     mataKuliahFragment mataKuliahFragment = new mataKuliahFragment();
@@ -36,30 +26,6 @@ public class dasboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dasboard);
 
-        Username = getIntent().getStringExtra("username");
-        Password = getIntent().getStringExtra("password");
-        namaTxt = getIntent().getStringExtra("nama");
-        alamatTxt = getIntent().getStringExtra("alamat");
-        emailTxt = getIntent().getStringExtra("email");
-        tglTxt = getIntent().getStringExtra("tanggalLahir");
-        NIMtxt = getIntent().getStringExtra("nim");
-        prodiTxt = getIntent().getStringExtra("prodi");
-        tlpTxt = getIntent().getStringExtra("tlp");
-        byteArray = getIntent().getByteArrayExtra("img");
-
-
-        Bundle bn = new Bundle();
-        bn.putString("nama", namaTxt);
-        bn.putString("username", Username);
-        bn.putString("alamat", alamatTxt);
-        bn.putString("email", emailTxt);
-        bn.putString("password", Password);
-        bn.putString("tanggalLahir", tglTxt);
-        bn.putString("nim", NIMtxt);
-        bn.putString("prodi", prodiTxt);
-        bn.putString("tlp", tlpTxt);
-        bn.putByteArray("img", byteArray);
-        profileFragment.setArguments(bn);
 
         BottomNavigationView nav = findViewById(R.id.bottomNavigationView);
         getSupportFragmentManager().beginTransaction().replace(R.id.forKonten, profileFragment).commit();

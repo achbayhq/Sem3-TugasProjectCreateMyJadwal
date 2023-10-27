@@ -6,8 +6,10 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -21,19 +23,25 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.abayhq.login.database.dbProfileHelper;
+
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class registerActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
 
-    public String nama;
-    public String pass;
+    EditText nama, nim, usrnm, pass, email, telephone, pp, alamat;
+    Spinner spinnerProdi;
     EditText etDate;
     Calendar myCalendar;
-    byte[] byteArray;
+    String img;
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int CAMERA_PERMISSION_REQUEST_CODE = 100;
@@ -42,6 +50,16 @@ public class registerActivity extends AppCompatActivity implements AdapterView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        nama = findViewById(R.id.txtNama);
+        nim = findViewById(R.id.nim);
+        usrnm = findViewById(R.id.txtUsrnmRegist);
+        pass = findViewById(R.id.txtPassRegist);
+        email = findViewById(R.id.txtEmail);
+        telephone = findViewById(R.id.tlp);
+        alamat = findViewById(R.id.txtAlamat);
+        Spinner spinner = findViewById(R.id.gender);
+        spinnerProdi = findViewById(R.id.prodi);
 
         imageView = findViewById(R.id.profile);
         Button upload = findViewById(R.id.upload);
@@ -63,8 +81,6 @@ public class registerActivity extends AppCompatActivity implements AdapterView.O
         etDate = (EditText) findViewById(R.id.txtTgl);
         myCalendar = Calendar.getInstance();
 
-        Spinner spinner = findViewById(R.id.gender);
-        Spinner spinnerProdi = findViewById(R.id.prodi);
         ArrayAdapter<CharSequence>adapter = ArrayAdapter.createFromResource(this, R.array.pilihan, android.R.layout.simple_spinner_item);
         ArrayAdapter<CharSequence>adapterProdi = ArrayAdapter.createFromResource(this, R.array.prodi, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -114,38 +130,25 @@ public class registerActivity extends AppCompatActivity implements AdapterView.O
     }
 
     public void udahRegist(View view) {
-        EditText usr = findViewById(R.id.txtUsrnmRegist);
-        EditText nm = findViewById(R.id.txtNama);
-        EditText almt = findViewById(R.id.txtAlamat);
-        EditText eml = findViewById(R.id.txtEmail);
-        EditText pss = findViewById(R.id.txtPassRegist);
-        EditText tgl = findViewById(R.id.txtTgl);
-        EditText nim = findViewById(R.id.nim);
-        EditText tlp = findViewById(R.id.tlp);
-        Spinner prodi = findViewById(R.id.prodi);
+        dbProfileHelper dbHelper = new dbProfileHelper(this, dbProfileHelper.DB_NAME, null, dbProfileHelper.DB_VER);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-        String usrnmFix = usr.getText().toString();
-        String passFix = pss.getText().toString();
-        String namaTxt = nm.getText().toString();
-        String alamatTxt = almt.getText().toString();
-        String emailTxt = eml.getText().toString();
-        String tglTxt = tgl.getText().toString();
-        String NIMTxt = nim.getText().toString();
-        String tlpTxt = tlp.getText().toString();
-        String prodiTxt = prodi.getSelectedItem().toString();
+        ContentValues values = new ContentValues();
+        values.put("nama", nama.getText().toString());
+        values.put("nim", nim.getText().toString());
+        values.put("username", usrnm.getText().toString());
+        values.put("pass", pass.getText().toString());
+        values.put("email", email.getText().toString());
+        values.put("telephone", telephone.getText().toString());
+        values.put("tanggal_lahir", etDate.getText().toString());
+        values.put("prodi", spinnerProdi.getSelectedItem().toString());
+        values.put("alamat", alamat.getText().toString());
+        values.put("img", img);
 
+        long newRowId = db.insert("profile", null, values);
+        db.close();
 
         Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("nama", namaTxt);
-        intent.putExtra("username", usrnmFix);
-        intent.putExtra("alamat", alamatTxt);
-        intent.putExtra("email", emailTxt);
-        intent.putExtra("password", passFix);
-        intent.putExtra("tanggalLahir", tglTxt);
-        intent.putExtra("nim", NIMTxt);
-        intent.putExtra("tlp", tlpTxt);
-        intent.putExtra("prodi", prodiTxt);
-        intent.putExtra("img", byteArray);
         startActivity(intent);
     }
 
@@ -164,8 +167,37 @@ public class registerActivity extends AppCompatActivity implements AdapterView.O
 
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            byteArray = stream.toByteArray();
+            img = saveImageToInternalStorage(imageBitmap);
             imageView.setImageBitmap(imageBitmap);
+        }
+    }
+
+    private String saveImageToInternalStorage(Bitmap imageBitmap) {
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + ".jpg";
+
+        // Mendapatkan direktori penyimpanan internal
+        File storageDir = getApplicationContext().getFilesDir();
+
+        // Membuat path lengkap untuk file gambar
+        File imageFile = new File(storageDir, imageFileName);
+
+        try {
+            // Membuat output stream untuk menulis gambar ke file
+            FileOutputStream outputStream = new FileOutputStream(imageFile);
+
+            // Kompres dan simpan gambar ke file
+            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+
+            // Tutup output stream
+            outputStream.close();
+
+            // Mengembalikan path file gambar
+            return imageFile.getAbsolutePath();
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Penanganan kesalahan, Anda bisa melemparkan atau mengembalikan null, tergantung pada kebutuhan Anda
+            return null;
         }
     }
 
